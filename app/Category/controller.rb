@@ -13,7 +13,8 @@ class CategoryController < Rho::RhoController
     p=Product.new
     p.object="qparms"
     p.category_id = @category.id
-    p.save  
+    p.save
+    SyncEngine.dosync  
     @products = p
     render :action => :show
   end
