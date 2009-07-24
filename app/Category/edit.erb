@@ -1,0 +1,27 @@
+<div class="toolbar">
+	<h1 id="pageTitle">
+		Edit <%=@category.name%>
+	</h1>
+</div>
+
+<form title="Edit Category" 
+	  class="panel" 
+	  id="category_edit_form" 
+	  method="POST" 
+	  action="<%=url_for(:action => :update)%>" selected="true">
+	<fieldset>
+		<input type="hidden" name="id" value="<%=@category.object%>"/>
+		
+		  <div class="row">
+			  <label>Name: </label>
+			  <input type="text" name="category[name]" value="<%=@category.name%>"/>
+		  </div>
+		
+	</fieldset>
+	<input type="submit" value="Update"/>
+	<p align="center">
+		<a href="<%=url_for(:action => :delete, :id => @category.object)%>">
+			<font color="#990000">Delete</font>
+		</a>
+	</p>
+</form>
