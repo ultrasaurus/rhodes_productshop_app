@@ -9,11 +9,11 @@
 <a class="button right_button" href="<%=url_for(:action => :edit, :id => @category.object)%>" target="_self">Edit</a>
 
 <table class="grid">
-  
-  <tr>
-	<td class="gridleft">Name</td>
-    <td class="gridright"><%=@category.name%></td>
-  </tr>
-  
+    <% @products.each do |product| %>
+    <tr>
+    <td class="gridleft">Name</td>
+      <td class="gridright"><%=product.name%></td>
+    </tr>
+    <% end %>
 </table>
 </div>

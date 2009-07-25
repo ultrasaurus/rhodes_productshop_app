@@ -12,7 +12,7 @@ class CategoryController < Rho::RhoController
     @category = Category.find(@params['id'])
     p=Product.new
     p.object="qparms"
-    p.category_id = @category.id
+    p.category_id = @params['id']
     p.save
     SyncEngine.dosync  
     @products = p
