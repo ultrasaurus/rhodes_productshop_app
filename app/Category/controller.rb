@@ -1,21 +1,27 @@
+require 'rho'
 require 'rho/rhocontroller'
 class CategoryController < Rho::RhoController
 
   #GET /Category
-  def index
+  def index  
+    # TODO: should we have an application controller that handles auth?
+    @logged_in = false # SyncEngine::logged_in
+    @logged_in = SyncEngine::login("tester", "tester")
     @categories = Category.find(:all)
+    @products=Product.find :all
+    SyncEngine::dosync if @logged_in
+    # Category.set_notification("/Category")  Error: wrong number of arguments (1 for 2)
+    #SyncEngine.set_notification(2302, "/Category")
     render
   end
 
   # GET /Category/{1}
   def show
     @category = Category.find(@params['id'])
-    p=Product.new
-    p.object="qparms"
-    p.category_id = @params['id']
-    p.save
-    SyncEngine.dosync  
-    @products = p
+    @products = Product.find(:category_id => @params['id'])
+    puts "======================================== show"
+    puts "category=#{@category.name}"
+    puts @products.inspect
     render :action => :show
   end
 
